@@ -18,3 +18,38 @@ import Foundation
 
 // 存储属性
 // 在其最简单的形式中，存储的属性是作为特定类或结构的实例的一部分存储的常量或变量。存储的属性可以是变量存储的属性（由var关键字引入）或常量存储的属性（由let关键字引入）。
+struct FixedLengthRange {
+
+    var firstValue:Int
+    let length:Int
+}
+
+var rangeOfThreeItems = FixedLengthRange(firstValue: 0, length: 3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
