@@ -97,7 +97,7 @@ class Car: Vehicle {
         return super.description + "in gear \(gear)"
     }
     
-    // Swift 可以吧存储属性覆盖为计算属性, 但是不能把计算属性覆盖为存储属性
+    // Swift 可以把存储属性覆盖为计算属性, 但是不能把计算属性覆盖为存储属性
     override var currentSpeed: Double {
     
         get {
@@ -110,11 +110,26 @@ class Car: Vehicle {
     }
 }
 
+// 重写属性观察器
+// 不能给继承而来的常量存储属性或者只读属性添加属性观察器, 这些属性的值不能被设置, 所以提供willSet 或者didSet 实现作为重写的一部分也不合适
 
+class AutomaticCar: Car {
+    
+    override var currentSpeed: Double {
+    
+        didSet {
+            gear = Int(currentSpeed / 10.0) + 1
+        }
+    }
+}
 
+// 无论你在什么时候设置了 AutomaticCar的实例的 currentSpeed 属性, 属性的didSet 观察器都会设置实例的gear 属性为新速度设置的合适的档位, 具体的说, 属性观察器选择的档位就是新的 currentSpeed 值厨艺10, 四舍五入到最近整数, 加1, 速度是35.0, 就对应4:
+let automatic = AutomaticCar()
+automatic.currentSpeed = 35.0
+print("AutomaticCar: \(automatic.description)")
 
-
-
+// 防止重写
+// 使用 关键字final 修饰的关键字无法被子列重写, 如: final func, final class func, final subscript, final var
 
 
 
